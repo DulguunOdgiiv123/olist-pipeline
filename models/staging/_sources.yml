@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: olist_raw
-    schema: public
+    schema: "{{ 'public' if target.name == 'dev' else target.schema }}"
     tables:
       - name: orders
       - name: customers
@@ -11,3 +11,9 @@ sources:
       - name: order_reviews
       - name: products
       - name: sellers
+
+      - name: Seed test data
+        run: dbt seed
+
+      - name: Run dbt build
+        run: dbt build
